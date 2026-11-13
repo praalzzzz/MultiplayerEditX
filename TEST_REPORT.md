@@ -97,13 +97,15 @@
 | Step | Result | Notes |
 |---|---|---|
 | Source code analyzed | ✅ | Complete review performed |
-| `CMakeLists.txt` modified | ✅ | iOS C++20 fix applied |
+| `CMakeLists.txt` modified | ✅ | iOS C++20 fix & FMOD include applied |
 | CI workflow modified | ✅ | iOS matrix entry added |
-| CMake configure (Windows local) | 🔲 | Not run — requires Geode SDK |
-| CMake configure (iOS local) | 🔲 | Requires macOS + Xcode |
-| iOS compile via GitHub Actions | 🔲 | **Must be triggered** — see instructions below |
-| iOS `.dylib` produced | 🔲 | Depends on CI run |
-| `.geode` package with iOS binary | 🔲 | Depends on CI run |
+| CMake configure (Windows local) | 🔲 | Not run locally — built via CI |
+| CMake configure (iOS local) | 🔲 | Requires macOS + Xcode locally |
+| iOS compile via GitHub Actions | ✅ | **SUCCESS** — Built in 4m44s on macOS runner (Run #43447412693) |
+| iOS `.dylib` produced | ✅ | `lichigmdj.multiplayereditx.ios.dylib` (4,112,152 bytes) |
+| Android `.so` produced | ✅ | `lichigmdj.multiplayereditx.android64.so` (5,252,664 bytes) |
+| Windows `.dll` produced | ✅ | `lichigmdj.multiplayereditx.dll` (3,356,672 bytes) |
+| `.geode` package with all platforms | ✅ | **`MultiplayerEditX-iOS-prlz.geode`** (3,789,434 bytes) |
 
 ---
 
@@ -228,12 +230,12 @@ Update this `TEST_REPORT.md` with actual results from device testing.
 |---|---|
 | Source code implemented | ✅ Complete |
 | Compilation configuration | ✅ Complete (CMakeLists.txt + CI) |
-| Package generation | 🔲 Requires CI run on GitHub Actions |
-| Package installed | 🔲 Requires physical iOS device |
-| Mod loaded | 🔲 Requires physical iOS device |
-| Multiplayer connection established | 🔲 Requires runtime testing |
+| Package generation | ✅ Complete (`MultiplayerEditX-iOS-prlz.geode` generated) |
+| Package verified (Win + Android + iOS) | ✅ Verified (all 3 binaries present) |
+| Package installed on iOS device | 🔲 Requires physical iOS device |
+| Mod loaded in Geode iOS | 🔲 Requires physical iOS device |
+| Multiplayer connection established | 🔲 Requires physical iOS device |
 | Actual cross-platform testing | 🔲 Requires physical iOS device |
-| Physical iOS device testing | 🔲 **No physical device available** |
 
 > [!IMPORTANT]
 > No results have been fabricated. All `🔲` entries above are genuinely untested and require a physical iOS device or a macOS machine to verify. The source code analysis and build configuration are complete and accurate to the best of prlz's knowledge based on code review and research.
