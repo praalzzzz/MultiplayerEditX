@@ -127,6 +127,15 @@ set(CMAKE_SKIP_INSTALL_RULES OFF)
 
 add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
 
+if (APPLE AND (IOS OR ("${CMAKE_SYSTEM_NAME}" STREQUAL "iOS")))
+    # Geode bindings on iOS generate standalone FMOD functions in GeneratedSource.cpp
+    # without explicitly including fmod.hpp, causing undefined FMOD_RESULT / FMOD types.
+    if (TARGET GeodeBindings)
+        target_compile_options(GeodeBindings PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:-include;fmod.hpp>")
+    endif()
+    target_compile_options(${PROJECT_NAME} PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:-include;fmod.hpp>")
+endif()
+
 if (WIN32)
     target_link_options(${PROJECT_NAME} PRIVATE "-Wl,/MAP")
 endif()
