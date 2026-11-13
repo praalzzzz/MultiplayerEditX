@@ -2,7 +2,14 @@ cmake_minimum_required(VERSION 3.21)
 
 project(MultiplayerEdit VERSION 0.5.3)
 
-set(CMAKE_CXX_STANDARD 23)
+# Apple Clang bundled with Xcode does not fully support C++23 for iOS targets.
+# Cap at C++20 for iOS builds; all other platforms continue to use C++23.
+# iOS port by prlz — see IOS_COMPATIBILITY.md Issue 2.
+if (IOS OR ("${CMAKE_SYSTEM_NAME}" STREQUAL "iOS"))
+    set(CMAKE_CXX_STANDARD 20)
+else()
+    set(CMAKE_CXX_STANDARD 23)
+endif()
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Apple-only architecture selection. Do not leak macOS/iOS settings into
